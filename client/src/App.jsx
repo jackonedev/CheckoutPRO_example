@@ -5,11 +5,11 @@ import Payment from "./components/Payment";
 import Checkout from "./components/Checkout";
 import Footer from "./components/Footer";
 import { SpinnerCircular } from "spinners-react";
+// import { URL, ACCESS_TOKEN, PUBLIC_KEY } from "./config.js";
 
 initMercadoPago("APP_USR-d6b54237-cca0-490f-900a-59405851aa7b");
 
 function App() {
-  
   const backend_url = "http://localhost:8000";
 
   const item = {
@@ -29,6 +29,7 @@ function App() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
       body: JSON.stringify(orderData),
     })
