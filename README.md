@@ -37,7 +37,7 @@ Una vez finalizada la transacción nos redirige hacia otro endpoint donde se imp
 ## Forma de uso:
 1) descargar este proyecto
 2) instalar dependencias del lado del cliente (npm install)
-3) instalar dependencias del lado del server (py -m venv venv | .\venv\Scripts\activate) | pip install -r requirements.txt)
+3) instalar dependencias del lado del server (py -m venv venv | .\venv\Scripts\activate | pip install -r requirements.txt)
 4) correr el frontend en un servidor local en el puerto 3000
 5) correr el backend en un servidor local en el puerto 8000
 6) ejecutar la interface react desde un navegador web accediendo a la url 'localhost:3000'
