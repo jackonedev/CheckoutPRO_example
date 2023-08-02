@@ -3,6 +3,8 @@
 .github/
 .vscode/
 
+# Personal file
+server.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
