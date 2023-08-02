@@ -1,36 +1,27 @@
 import React, { useState } from "react";
 import { initMercadoPago } from "@mercadopago/sdk-react";
-
+import InternalProvider from "./components/ContextProvider";
+import Payment from "./components/Payment";
+import Checkout from "./components/Checkout";
+import Footer from "./components/Footer";
 import { SpinnerCircular } from "spinners-react";
 
-// REPLACE WITH YOUR PUBLIC KEY AVAILABLE IN: https://developers.mercadopago.com/panel
 initMercadoPago("APP_USR-d6b54237-cca0-490f-900a-59405851aa7b");
 
 function App() {
+  
   const backend_url = "http://localhost:8000";
 
-  const item_1 = {
-    quantity: "1",
-    price: "500",
-    amount: 7,
-    description: "5 Titas",
-  };
-  const item_2 = {
-    quantity: "1",
-    price: "1500",
-    amount: 20,
-    description: "3 Birras",
-  };
-  const item_3 = {
-    quantity: "1",
-    price: "5000",
-    amount: 15,
-    description: "Choppera",
+  const item = {
+    quantity: 1,
+    price: "10",
+    amount: 10,
+    description: "Some book",
   };
 
   const [preferenceId, setPreferenceId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [orderData, setOrderData] = useState(item_1);
+  const [orderData, setOrderData] = useState(item);
 
   const handleClick = () => {
     setIsLoading(true);
@@ -66,21 +57,16 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <InternalProvider
+      context={{ preferenceId, isLoading, orderData, setOrderData }}
+    >
+      <main>
+        {renderSpinner()}
+        <Checkout onClick={handleClick} params={item} />
+        <Payment />
+      </main>
+      <Footer />
+    </InternalProvider>
   );
 }
 
