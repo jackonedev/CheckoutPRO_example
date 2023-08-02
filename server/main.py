@@ -30,7 +30,6 @@ app.add_middleware(
 @app.post("/create_preference")
 async def create_preference(request: Request):
     body = await request.json()
-    print(f"\n\tRequest body: {body}\n")
 
     # # creating SDK instance
     # access_token = request.headers["Authorization"].split(" ")[1]
@@ -53,18 +52,16 @@ async def create_preference(request: Request):
         "auto_return": "approved",
     }
     response = sdk.preference().create(preference)
-    print(f"\n\tMercadoPago response status code: {response['status']}\n")
     if response["status"] == 201:
         return JSONResponse(content={"id": response["response"]["id"]})
     else:
-        print(f"\n\tMercadoPago response:\n{response}\n")
+        print(f"\tMercadoPago response error:{response}")
         return JSONResponse(content={"error": response["response"]})
 
 
 @app.get('/feedback')
 async def feedback(request: Request, collection_id: str, collection_status: str, payment_id: str, status: str, external_reference: str, payment_type: str, merchant_order_id: str, preference_id: str, site_id: str, processing_mode: str, merchant_account_id: str):
-    print(f"operation: feedback")
-    print(f"request: {request}")
+    # print(f"request: {request}") -> <starlette.requests.Request object at 0x000002057C96AA90>
     return JSONResponse(content={
         "Payment": payment_id,
         "Status": status,
